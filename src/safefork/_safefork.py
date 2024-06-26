@@ -87,7 +87,9 @@ def _check_no_event_loop() -> bool:
 
 def _check_gc_freeze_ran() -> bool:
     freeze_count = gc.get_freeze_count()
-    if freeze_count == 0:
+    # python 3.12 comes with 375 objects already frozen (!)
+    # Picking 1000 here since running `gc.freeze()` should put you well above that number.
+    if freeze_count < 1000:
         logger.warning(
             "It's recommended to run `gc.freeze()` before forking to avoid 'holes' in memory. "
             "You likely want to `gc.disable()` before forking and `gc.enable()` after forking. "
