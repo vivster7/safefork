@@ -41,9 +41,12 @@ extra-dependencies = [
 [tool.hatch.envs.types.scripts]
 check = "mypy --install-types --non-interactive {args:src/safefork tests}"
 
-[tool.hatch.envs.tests]
+[tool.hatch.envs.test]
 extra-dependencies = [
   "pytest>=1.0.0",
 ]
-[tool.hatch.envs.tests.scripts]
-check = "pytest {args:tests}"
+[tool.hatch.envs.test.scripts]
+test = "pytest {args:tests}"
+
+[[tool.hatch.envs.test.matrix]]
+python = ["3.8", "3.9", "3.10", "3.11", "3.12"]
