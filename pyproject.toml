@@ -1,0 +1,49 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "safefork"
+dynamic = ["version"]
+description = 'Utilities for safely forking a process'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = ["fork", "safe", "process", "python"]
+authors = [
+  { name = "Vivek Dasari", email = "vivster7@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/vivster7/safefork#readme"
+Issues = "https://github.com/vivster7/safefork/issues"
+Source = "https://github.com/vivster7/safefork"
+
+[tool.hatch.version]
+path = "src/safefork/__init__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/safefork tests}"
+
+[tool.hatch.envs.tests]
+extra-dependencies = [
+  "pytest>=1.0.0",
+]
+[tool.hatch.envs.tests.scripts]
+check = "pytest {args:tests}"
